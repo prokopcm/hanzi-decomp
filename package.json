@@ -26,7 +26,8 @@
     "cjk",
     "kanji",
     "radical",
-    "hanja"
+    "hanja",
+    "nlp"
   ],
   "author": "Michael Prokopchuk",
   "license": "MIT",
