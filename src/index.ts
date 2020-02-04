@@ -1,1 +1,1 @@
-export const greeting = "大家好"
+export const greeting = '大家好'
