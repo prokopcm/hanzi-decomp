@@ -2,12 +2,18 @@
   "name": "hanzi-decomp",
   "version": "0.0.1",
   "description": "A tool that decomposes CJK characters into their components",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
     "lint": "tsc --noEmit && eslint --ext .ts ./src",
     "lint-fix": "tsc --noEmit && eslint --ext .ts ./src --quiet --fix",
-    "test": "jest"
+    "prepare" : "npm run build",
+    "prepublishOnly" : "npm test && npm run lint-fix",
+    "preversion" : "npm run lint-fix",
+    "postversion" : "git push && git push --tags",
+    "test": "jest",
+    "version" : "npm run lint-fix && git add -A src"
   },
   "repository": {
     "type": "git",
