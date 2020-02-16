@@ -1,5 +1,5 @@
-import { greeting } from '../index'
+import { decompose } from '../index'
 
 test('Initial test', () => {
-  expect(greeting).toBe('大家好')
+  expect(decompose('你')).toEqual(['你'])
 })
