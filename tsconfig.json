@@ -6,8 +6,9 @@
     "module": "commonjs",
     "declaration": true,
     "outDir": "./lib",
+    "sourceMap": true,
     "strict": true
   },
-  "include": ["src"],
+  "include": ["scripts", "src"],
   "exclude": ["node_modules", "**/__tests__/*"]
 }
