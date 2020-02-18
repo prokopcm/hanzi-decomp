@@ -51,7 +51,7 @@ export default function convert (): any {
     }
   }
 
-  fs.writeFileSync('decompMap.ts', 'export default const decompMap = ' + JSON.stringify(characterData, null, 2))
+  fs.writeFileSync('decompMap.ts', 'export default ' + JSON.stringify(characterData, null, 2))
   return characterData
 }
 
