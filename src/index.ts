@@ -1,4 +1,4 @@
-import decompMap from './data/decompMap'
+import { decompMap } from './data/decompMap'
 
 /**
  * Breaks apart a string of characters into their component parts.
@@ -10,8 +10,10 @@ export function decompose (characters: string): any {
   const trimmedCharacters = Array.from(characters.replace(/\s/g, ''))
 
   for (const zi of trimmedCharacters) {
-    if ((decompMap as any)[zi]) {
+    if (decompMap[zi]) {
       characterList.push((decompMap as any)[zi])
+    } else {
+      characterList.push(undefined)
     }
   }
 
