@@ -22,11 +22,11 @@ export default function convert (): any {
       // Start on line 1 because line 0 is always an encoding comment in the ids
       // files.
       for (let i = 1; i < contentLength; i++) {
+        const components: string[] = []
         const splitLine = contents[i].split('\t')
         const writing = splitLine[1]
 
         let type = 'atomic'
-        let components: string[] = []
 
         // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
         if (!writing) {
@@ -37,7 +37,25 @@ export default function convert (): any {
         // Need to filter out unicode ranges for decomp type.
         if (splitLine[2].length > 1) {
           type = splitLine[2].substring(0, 1)
-          components = Array.from(splitLine[2].substring(1))
+          const possibleComponents = Array.from(splitLine[2].substring(1))
+
+          let unicode = ''
+
+          for (const component of possibleComponents) {
+            if (/[-&0-9A-Za-z;]/.test(component)) {
+              unicode += component
+            } else {
+              if (unicode.length) {
+                components.push(...unicode.split(';').filter(char => !!char).map(char => char + ';'))
+              }
+
+              components.push(component)
+            }
+          }
+
+          if (unicode.length) {
+            components.push(...unicode.split(';').filter(char => !!char).map(char => char + ';'))
+          }
         }
 
         characterData[writing] = {
@@ -51,7 +69,8 @@ export default function convert (): any {
     }
   }
 
-  fs.writeFileSync('decompMap.ts', 'export default ' + JSON.stringify(characterData, null, 2))
+  fs.writeFileSync('decompData.json', JSON.stringify(characterData, null, 2))
+
   return characterData
 }
 
