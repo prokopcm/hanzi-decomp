@@ -4,6 +4,7 @@
   "description": "A tool that decomposes CJK characters into their components",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "private": true,
   "scripts": {
     "build": "tsc",
     "lint": "eslint --ext .ts ./src",
